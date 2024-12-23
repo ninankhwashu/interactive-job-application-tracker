@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Application Tracker</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Job Application Tracker</h1>
+    </header>
+
+    <main>
+      <section id="add-job">
+        <h2>Add Job Application</h2>
+        <form id="job-form">
+          <label for="company-name">Company Name</label>
+          <input
+            type="text"
+            id="company-name"
+            placeholder="Enter company name"
+            required
+          />
+
+          <label for="job-title">Job Title</label>
+          <input
+            type="text"
+            id="job-title"
+            placeholder="Enter job title"
+            required
+          />
+
+          <label for="application-status">Application Status</label>
+          <select id="application-status" required>
+            <option value="applied">Applied</option>
+            <option value="interview">Interview Scheduled</option>
+            <option value="offer">Offer Received</option>
+            <option value="rejected">Rejected</option>
+          </select>
+
+          <label for="deadline">Application Deadline</label>
+          <input type="date" id="deadline" required />
+
+          <button type="submit">Add Job</button>
+        </form>
+      </section>
+
+      <section id="job-list">
+        <h2>My Applications</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Job Title</th>
+              <th>Status</th>
+              <th>Deadline</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="job-entries"></tbody>
+        </table>
+      </section>
+
+      <section id="charts">
+        <h2>Application Insights</h2>
+        <div id="chart-container"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2024 Nina Nkhwashu. All rights reserved.</p>
+    </footer>
+
+    <script src="src/script.js"></script>
+  </body>
+</html>
