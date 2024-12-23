@@ -11,6 +11,13 @@ jobForm.addEventListener("submit", function (event) {
   let company = document.querySelector("#company-name").value;
   let status = document.querySelector("#job-status").value;
 
+  let applicationsSection = document.querySelector("#job-list");
+  if (applicationsSection) {
+    applicationsSection.scrollIntoView({ behavior: "smooth" });
+  } else {
+    console.error("Job list section not found!");
+  }
+
   jobs.push({ title, company, status });
 
   jobForm.reset();
