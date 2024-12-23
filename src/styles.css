@@ -5,110 +5,176 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f9;
   color: #333;
-  margin: 0;
-  padding: 20px;
+  padding: 40px 20px;
+  line-height: 1.6;
 }
 
 header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 header h1 {
-  color: #333;
-  font-size: 36px;
+  font-size: 48px;
+  color: #2c3e50;
 }
 
 header p {
   font-size: 18px;
-  color: #777;
+  color: #7f8c8d;
 }
 
 #add-job-form {
   background: #fff;
-  padding: 20px;
-  margin-bottom: 40px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto 40px;
 }
 
 #add-job-form h2 {
+  font-size: 28px;
   margin-bottom: 20px;
-  font-size: 24px;
+  color: #2c3e50;
 }
 
 label {
   display: block;
-  margin-bottom: 8px;
   font-weight: bold;
+  margin-bottom: 10px;
+  color: #34495e;
 }
 
 input,
 select,
 button {
   width: 100%;
-  padding: 10px;
+  padding: 14px;
   margin-bottom: 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+input,
+select {
+  background-color: #ecf0f1;
 }
 
 button {
-  background-color: #4caf50;
+  background-color: #2980b9;
   color: white;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #3498db;
 }
 
 #filters {
   margin-bottom: 40px;
+  text-align: center;
 }
 
 #filters select {
   width: 200px;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
   border: 1px solid #ddd;
+  background-color: #ecf0f1;
+  color: #34495e;
+  transition: background-color 0.3s ease;
+}
+
+#filters select:hover {
+  background-color: #bdc3c7;
 }
 
 #job-list {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 #job-list table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 #job-list th,
-td {
-  padding: 12px;
+#job-list td {
+  padding: 14px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
 
 #job-list th {
-  background-color: #f4f4f4;
+  background-color: #ecf0f1;
+  color: #2c3e50;
+}
+
+#job-list tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#job-list tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s ease;
 }
 
 button.remove-job {
-  background-color: red;
+  background-color: #e74c3c;
   color: white;
   border: none;
-  padding: 5px 10px;
+  padding: 6px 12px;
+  font-weight: bold;
   cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
 }
 
 button.remove-job:hover {
-  background-color: darkred;
+  background-color: #c0392b;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 20px;
+  }
+
+  header h1 {
+    font-size: 36px;
+  }
+
+  #add-job-form {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  #filters select {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  #job-list table {
+    font-size: 14px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  button.remove-job {
+    font-size: 14px;
+  }
 }
