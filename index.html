@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interactive Job Application Tracker</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="src/styles.css" />
   </head>
   <body>
@@ -12,60 +16,62 @@
       <p>Keep track of your job applications, deadlines, and interviews.</p>
     </header>
 
-    <section id="add-job-form">
-      <h2>Add Job Application</h2>
-      <form id="job-form">
-        <label for="job-title">Job Title</label>
-        <input
-          type="text"
-          id="job-title"
-          placeholder="e.g. Frontend Developer"
-          required
-        />
+    <main>
+      <section id="add-job-form">
+        <h2>Add Job Application</h2>
+        <form id="job-form">
+          <label for="job-title">Job Title</label>
+          <input
+            type="text"
+            id="job-title"
+            placeholder="e.g. Frontend Developer"
+            required
+          />
 
-        <label for="company-name">Company</label>
-        <input
-          type="text"
-          id="company-name"
-          placeholder="e.g. XYZ Corp"
-          required
-        />
+          <label for="company-name">Company</label>
+          <input
+            type="text"
+            id="company-name"
+            placeholder="e.g. XYZ Corp"
+            required
+          />
 
-        <label for="job-status">Status</label>
-        <select id="job-status">
+          <label for="job-status">Status</label>
+          <select id="job-status">
+            <option value="Applied">Applied</option>
+            <option value="Interview">Interview Scheduled</option>
+            <option value="Offer">Offer Received</option>
+          </select>
+
+          <button type="submit">Add Job</button>
+        </form>
+      </section>
+
+      <section id="filters">
+        <h2>Filter Applications</h2>
+        <select id="status-filter">
+          <option value="All">All</option>
           <option value="Applied">Applied</option>
           <option value="Interview">Interview Scheduled</option>
           <option value="Offer">Offer Received</option>
         </select>
+      </section>
 
-        <button type="submit">Add Job</button>
-      </form>
-    </section>
-
-    <section id="filters">
-      <h2>Filter Applications</h2>
-      <select id="status-filter">
-        <option value="All">All</option>
-        <option value="Applied">Applied</option>
-        <option value="Interview">Interview Scheduled</option>
-        <option value="Offer">Offer Received</option>
-      </select>
-    </section>
-
-    <section id="job-list">
-      <h2>Your Applications</h2>
-      <table id="job-table">
-        <thead>
-          <tr>
-            <th>Job Title</th>
-            <th>Company</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
+      <section id="job-list">
+        <h2>Your Applications</h2>
+        <table id="job-table">
+          <thead>
+            <tr>
+              <th>Job Title</th>
+              <th>Company</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </main>
 
     <script src="src/script.js"></script>
   </body>

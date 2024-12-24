@@ -1,8 +1,9 @@
 let jobForm = document.querySelector("#job-form");
 let jobTable = document.querySelector("#job-table tbody");
 let statusFilter = document.querySelector("#status-filter");
+let applicationsSection = document.querySelector("#job-list");
 
-let jobs = [];
+let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
 
 jobForm.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -11,18 +12,16 @@ jobForm.addEventListener("submit", function (event) {
   let company = document.querySelector("#company-name").value;
   let status = document.querySelector("#job-status").value;
 
-  let applicationsSection = document.querySelector("#job-list");
-  if (applicationsSection) {
-    applicationsSection.scrollIntoView({ behavior: "smooth" });
-  } else {
-    console.error("Job list section not found!");
-  }
-
   jobs.push({ title, company, status });
+
+  localStorage.setItem("jobs", JSON.stringify(jobs));
 
   jobForm.reset();
 
   updateJobList();
+  showAlert("Job added successfully!", "success");
+
+  applicationsSection.scrollIntoView({ behavior: "smooth" });
 });
 
 function updateJobList() {
@@ -51,7 +50,9 @@ function updateJobList() {
     removeButton.classList.add("remove-job");
     removeButton.addEventListener("click", function () {
       jobs.splice(index, 1);
+      localStorage.setItem("jobs", JSON.stringify(jobs));
       updateJobList();
+      showAlert("Job removed successfully!", "error");
     });
 
     actionsCell.appendChild(removeButton);
@@ -64,4 +65,28 @@ function updateJobList() {
   });
 }
 
+function showAlert(message, type) {
+  let alert = document.createElement("div");
+  alert.textContent = message;
+  alert.className = `alert alert-${type}`;
+  alert.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: ${type === "success" ? "#2ecc71" : "#e74c3c"};
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeInOut 3s ease forwards;
+  `;
+  document.body.appendChild(alert);
+
+  setTimeout(() => alert.remove(), 3000);
+}
+
 statusFilter.addEventListener("change", updateJobList);
+
+updateJobList();
