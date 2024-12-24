@@ -6,8 +6,8 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f6f9;
-  color: #333;
+  background-color: #d9e1ec;
+  color: #000000;
   padding: 40px 20px;
   line-height: 1.6;
 }
@@ -19,12 +19,12 @@ header {
 
 header h1 {
   font-size: 48px;
-  color: #2c3e50;
+  color: #000000;
 }
 
 header p {
   font-size: 18px;
-  color: #7f8c8d;
+  color: #000000;
 }
 
 #add-job-form {
@@ -39,14 +39,14 @@ header p {
 #add-job-form h2 {
   font-size: 28px;
   margin-bottom: 20px;
-  color: #2c3e50;
+  color: #000000;
 }
 
 label {
   display: block;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #34495e;
+  color: #000000;
 }
 
 input,
@@ -88,13 +88,13 @@ button:hover {
   font-size: 16px;
   border-radius: 8px;
   border: 1px solid #ddd;
-  background-color: #ecf0f1;
-  color: #34495e;
-  transition: background-color 0.3s ease;
+  background-color: #ffffff;
+  color: #000000;
+  transition: 0.3s ease;
 }
 
 #filters select:hover {
-  background-color: #bdc3c7;
+  background-color: #91c7fc;
 }
 
 #job-list {
@@ -115,10 +115,11 @@ button:hover {
   padding: 14px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  background-color: #91c7fc;
 }
 
 #job-list th {
-  background-color: #ecf0f1;
+  background-color: #ffffff;
   color: #2c3e50;
 }
 
@@ -128,7 +129,8 @@ button:hover {
 
 #job-list tr:hover {
   background-color: #f1f1f1;
-  transition: background-color 0.3s ease;
+  transition: 0.3s ease;
+  background-color: #fbf6f3;
 }
 
 button.remove-job {
