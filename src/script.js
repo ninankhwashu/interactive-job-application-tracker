@@ -1,38 +1,62 @@
-let jobForm = document.querySelector("#job-form");
-let jobTable = document.querySelector("#job-table tbody");
-let statusFilter = document.querySelector("#status-filter");
-let applicationsSection = document.querySelector("#job-list");
+// Grab references to DOM elements
+let jobForm = document.getElementById("job-form");
+let jobTableBody = document.querySelector("#job-table tbody");
+let statusFilter = document.getElementById("status-filter");
+let applicationsSection = document.getElementById("job-list");
 
-let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
+// Load jobs from localStorage or initialize an empty array
+let jobs = []; // Start with an empty array to initialize
+try {
+  let storedJobs = localStorage.getItem("jobs");
+  jobs = storedJobs ? JSON.parse(storedJobs) : [];
+} catch (err) {
+  console.error("Error parsing jobs from localStorage:", err);
+  jobs = [];
+}
 
+// Handle form submission to add a new job
 jobForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+  event.preventDefault(); // Prevent the form from refreshing the whole page
 
-  let title = document.querySelector("#job-title").value;
-  let company = document.querySelector("#company-name").value;
-  let status = document.querySelector("#job-status").value;
+  let title = document.getElementById("job-title").value.trim();
+  let company = document.getElementById("company-name").value.trim();
+  let status = document.getElementById("job-status").value;
 
-  jobs.push({ title, company, status });
+  if (!title || !company) {
+    showAlert("Please fill in all fields.", "error");
+    return;
+  }
 
+  // Create a job object and add it to the array
+  let newJob = { title, company, status };
+  jobs.push(newJob);
+
+  // Update localStorage
   localStorage.setItem("jobs", JSON.stringify(jobs));
 
+  // Clear the form sections
   jobForm.reset();
 
+  // Update the job list in the user interface
   updateJobList();
-  showAlert("Job added successfully!", "success");
 
+  // Notify the user and scroll to the list
+  showAlert("Job added successfully!", "success");
   applicationsSection.scrollIntoView({ behavior: "smooth" });
 });
 
+// Function to update the job list display
 function updateJobList() {
-  jobTable.innerHTML = "";
+  // Clear the table
+  jobTableBody.innerHTML = "";
 
-  let filteredJobs = jobs.filter(function (job) {
-    if (statusFilter.value === "All") return true;
-    return job.status === statusFilter.value;
+  // Filter jobs based on selected filter
+  let filteredJobs = jobs.filter((job) => {
+    return statusFilter.value === "All" || job.status === statusFilter.value;
   });
 
-  filteredJobs.forEach(function (job, index) {
+  // Populate the table with filtered jobs
+  filteredJobs.forEach((job, index) => {
     let row = document.createElement("tr");
 
     let titleCell = document.createElement("td");
@@ -47,8 +71,10 @@ function updateJobList() {
     let actionsCell = document.createElement("td");
     let removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
-    removeButton.classList.add("remove-job");
-    removeButton.addEventListener("click", function () {
+    removeButton.className = "remove-job";
+
+    // Add remove button functionality
+    removeButton.addEventListener("click", () => {
       jobs.splice(index, 1);
       localStorage.setItem("jobs", JSON.stringify(jobs));
       updateJobList();
@@ -56,15 +82,19 @@ function updateJobList() {
     });
 
     actionsCell.appendChild(removeButton);
+
+    // Append cells to the row
     row.appendChild(titleCell);
     row.appendChild(companyCell);
     row.appendChild(statusCell);
     row.appendChild(actionsCell);
 
-    jobTable.appendChild(row);
+    // Append the row to the table body
+    jobTableBody.appendChild(row);
   });
 }
 
+// Function to display alerts for feedback
 function showAlert(message, type) {
   let alert = document.createElement("div");
   alert.textContent = message;
@@ -73,20 +103,25 @@ function showAlert(message, type) {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: ${type === "success" ? "#2ecc71" : "#e74c3c"};
+    background-color: ${type === "success" ? "#2ecc71" : "#e74c3c"};
     color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 10px 15px;
+    border-radius: 4px;
     font-weight: bold;
     z-index: 1000;
     opacity: 0;
     animation: fadeInOut 3s ease forwards;
   `;
+
   document.body.appendChild(alert);
 
-  setTimeout(() => alert.remove(), 3000);
+  setTimeout(() => {
+    alert.remove();
+  }, 3000);
 }
 
+// Filter jobs when the filter changes
 statusFilter.addEventListener("change", updateJobList);
 
+// Initial rendering of the job list
 updateJobList();
