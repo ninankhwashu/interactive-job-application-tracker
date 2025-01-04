@@ -185,3 +185,17 @@ button.remove-job:hover {
     font-size: 14px;
   }
 }
+
+a {
+  color: #33ff66;
+}
+strong {
+  color: #33ff66;
+}
+
+footer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 15px;
+  color: white;
+}
