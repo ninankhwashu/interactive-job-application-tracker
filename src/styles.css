@@ -22,6 +22,11 @@ header h1 {
   color: #ffffff;
 }
 
+header h2 {
+  font-size: 28px;
+  color: #33ffc2;
+}
+
 header p {
   font-size: 18px;
   color: whitesmoke;
