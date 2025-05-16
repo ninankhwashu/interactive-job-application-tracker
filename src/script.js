@@ -1,11 +1,9 @@
-// Grab references to DOM elements
 let jobForm = document.getElementById("job-form");
 let jobTableBody = document.querySelector("#job-table tbody");
 let statusFilter = document.getElementById("status-filter");
 let applicationsSection = document.getElementById("job-list");
 
-// Load jobs from localStorage or initialize an empty array
-let jobs = []; // Start with an empty array to initialize
+let jobs = [];
 try {
   let storedJobs = localStorage.getItem("jobs");
   jobs = storedJobs ? JSON.parse(storedJobs) : [];
@@ -14,9 +12,8 @@ try {
   jobs = [];
 }
 
-// Handle form submission to add a new job
 jobForm.addEventListener("submit", function (event) {
-  event.preventDefault(); // Prevent the form from refreshing the whole page
+  event.preventDefault();
 
   let title = document.getElementById("job-title").value.trim();
   let company = document.getElementById("company-name").value.trim();
@@ -27,35 +24,26 @@ jobForm.addEventListener("submit", function (event) {
     return;
   }
 
-  // Create a job object and add it to the array
   let newJob = { title, company, status };
   jobs.push(newJob);
 
-  // Update localStorage
   localStorage.setItem("jobs", JSON.stringify(jobs));
 
-  // Clear the form sections
   jobForm.reset();
 
-  // Update the job list in the user interface
   updateJobList();
 
-  // Notify the user and scroll to the list
   showAlert("Job added successfully!", "success");
   applicationsSection.scrollIntoView({ behavior: "smooth" });
 });
 
-// Function to update the job list display
 function updateJobList() {
-  // Clear the table
   jobTableBody.innerHTML = "";
 
-  // Filter jobs based on selected filter
   let filteredJobs = jobs.filter((job) => {
     return statusFilter.value === "All" || job.status === statusFilter.value;
   });
 
-  // Populate the table with filtered jobs
   filteredJobs.forEach((job, index) => {
     let row = document.createElement("tr");
 
@@ -73,7 +61,6 @@ function updateJobList() {
     removeButton.textContent = "Remove";
     removeButton.className = "remove-job";
 
-    // Add remove button functionality
     removeButton.addEventListener("click", () => {
       jobs.splice(index, 1);
       localStorage.setItem("jobs", JSON.stringify(jobs));
@@ -83,18 +70,15 @@ function updateJobList() {
 
     actionsCell.appendChild(removeButton);
 
-    // Append cells to the row
     row.appendChild(titleCell);
     row.appendChild(companyCell);
     row.appendChild(statusCell);
     row.appendChild(actionsCell);
 
-    // Append the row to the table body
     jobTableBody.appendChild(row);
   });
 }
 
-// Function to display alerts for feedback
 function showAlert(message, type) {
   let alert = document.createElement("div");
   alert.textContent = message;
@@ -120,8 +104,6 @@ function showAlert(message, type) {
   }, 3000);
 }
 
-// Filter jobs when the filter changes
 statusFilter.addEventListener("change", updateJobList);
 
-// Initial rendering of the job list
 updateJobList();
